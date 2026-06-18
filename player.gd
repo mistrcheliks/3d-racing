@@ -4,10 +4,7 @@ extends Node3D
 @onready var car_mesh = $sedan
 @onready var ground_ray = $GroundRay
 
-# ЭТА ПЕРЕМЕННАЯ НУЖНА ДЛЯ КАМЕРЫ.
-# Она дублирует скорость физического шара, чтобы камера могла её прочитать.
-var linear_velocity: Vector3 = Vector3.ZERO
-
+var camera_target: Node3D
 var sphere_offset = Vector3(0,-1,0)
 var acceleration = 100
 var steering = 15.0
@@ -19,6 +16,7 @@ var rotate_input = 0
 
 func _ready():
 	ground_ray.add_exception(ball)
+	camera_target = car_mesh  # expose sedan to the outside
 	
 func _physics_process(_delta):
 	car_mesh.transform.origin = ball.transform.origin + sphere_offset
