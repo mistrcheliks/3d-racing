@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c2gp6h302pube" path="res://main.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dj7kf6mv7o14x" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bqhhmy45lyd2u" path="res://camera_3d.gd" id="3_h2yge"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
 albedo_color = Color(0.4630682, 0.4630682, 0.4630682, 1)
@@ -25,7 +26,13 @@ data = PackedVector3Array(5, 2.5, 5, 5, -2.5, 5, -5, -2.5, 5, 5, 2.5, -5, -5, -2
 script = ExtResource("1_7mycd")
 
 [node name="Player" parent="." unique_id=375948883 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(-1, 0, -9.685755e-08, 0, 1, 0, 9.685755e-08, 0, -1, 0, 2.4999995, 0)
+transform = Transform3D(1, 0, -1.7881393e-07, 0, 1, 0, 1.7881393e-07, 0, 1, 0, 2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1049996478]
+transform = Transform3D(-1, -6.181724e-08, 6.181724e-08, 0, 0.70710677, 0.70710677, -8.742278e-08, 0.70710677, -0.70710677, 0, 5.135, -3)
+fov = 91.60399
+script = ExtResource("3_h2yge")
+target_path = NodePath("../Player")
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=533098241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)

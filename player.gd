@@ -1,10 +1,14 @@
 extends Node3D
 
 @onready var ball = $Ball
-@onready var car_mesh = $wheelchair
-@onready var ground_ray = $wheelchair/GroundRay
+@onready var car_mesh = $sedan
+@onready var ground_ray = $GroundRay
 
-var sphere_offset = Vector3(0,0,0)
+# ЭТА ПЕРЕМЕННАЯ НУЖНА ДЛЯ КАМЕРЫ.
+# Она дублирует скорость физического шара, чтобы камера могла её прочитать.
+var linear_velocity: Vector3 = Vector3.ZERO
+
+var sphere_offset = Vector3(0,-1,0)
 var acceleration = 100
 var steering = 15.0
 var turn_speed = 3
@@ -18,7 +22,7 @@ func _ready():
 	
 func _physics_process(_delta):
 	car_mesh.transform.origin = ball.transform.origin + sphere_offset
-	ball.apply_central_force(car_mesh.global_transform.basis.x * speed_input)
+	ball.apply_central_force(car_mesh.global_transform.basis.z * speed_input)
 
 func _process(delta):
 	if not ground_ray.is_colliding():

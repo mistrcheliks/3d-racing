@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dj7kf6mv7o14x"]
 
 [ext_resource type="Script" uid="uid://bglr2e5b2o7sq" path="res://player.gd" id="1_i3pqv"]
-[ext_resource type="PackedScene" uid="uid://bp5gbv8alq1vr" path="res://assets/wheelchair/wheelchair.glb" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://cegliad2iv10k" path="res://assets/wheelchair/sedan-sports.glb" id="3_i3pqv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
 bounce = 0.1
@@ -10,6 +10,7 @@ bounce = 0.1
 radius = 1.0
 
 [node name="Player" type="Node3D" unique_id=1992417494]
+transform = Transform3D(1, 0, -1.7881393e-07, 0, 1, 0, 1.7881393e-07, 0, 1, 0, 0, 0)
 script = ExtResource("1_i3pqv")
 
 [node name="Ball" type="RigidBody3D" parent="." unique_id=1490902800]
@@ -21,9 +22,9 @@ angular_damp = 5.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=1989191903]
 shape = SubResource("SphereShape3D_i3pqv")
 
-[node name="wheelchair" parent="." unique_id=860746698 instance=ExtResource("2_onrkg")]
-transform = Transform3D(-2.1855698e-08, 0, -0.50000006, 0, 0.5, 0, 0.49999997, 0, -2.1855705e-08, 0, -0.100000024, 0)
-
-[node name="GroundRay" type="RayCast3D" parent="wheelchair" unique_id=1855764492]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+[node name="GroundRay" type="RayCast3D" parent="." unique_id=1855764492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_mask = 2
+
+[node name="sedan" parent="." unique_id=837054903 instance=ExtResource("3_i3pqv")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 0, -1, 0)
