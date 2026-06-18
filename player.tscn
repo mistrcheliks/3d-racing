@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dj7kf6mv7o14x"]
+
+[ext_resource type="Script" uid="uid://bglr2e5b2o7sq" path="res://player.gd" id="1_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://bp5gbv8alq1vr" path="res://assets/wheelchair/wheelchair.glb" id="2_onrkg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4flbx"]
+radius = 1.0
+height = 2.0
+
+[node name="Player" type="RigidBody3D" unique_id=1832981975]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 0, 0, 0)
+collision_mask = 2
+script = ExtResource("1_i3pqv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1392783213]
+shape = SubResource("SphereShape3D_4flbx")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=1934589864]
+
+[node name="RoughModel" type="MeshInstance3D" parent="Pivot" unique_id=340698285]
+mesh = SubResource("SphereMesh_4flbx")
+
+[node name="wheelchair" parent="Pivot" unique_id=860746698 instance=ExtResource("2_onrkg")]
+visible = false
+
+[node name="WheelFL" type="RayCast3D" parent="Pivot" unique_id=1998710644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0000001, 0, 0.9999998)
+collision_mask = 2
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="WheelFR" type="RayCast3D" parent="Pivot" unique_id=1462977039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9999998, 0, 1.0000001)
+collision_mask = 2
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="WheelBL" type="RayCast3D" parent="Pivot" unique_id=1800371508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9999998, 0, -1.0000001)
+collision_mask = 2
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="WheelBR" type="RayCast3D" parent="Pivot" unique_id=833678006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000001, 0, -0.9999998)
+collision_mask = 2
+debug_shape_custom_color = Color(1, 0, 0, 1)
