@@ -1,14 +1,7 @@
 [gd_scene format=3 uid="uid://qw62lx0ds60b"]
 
-[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_1bvp3"]
 [ext_resource type="Script" uid="uid://c2gp6h302pube" path="res://main.gd" id="1_7mycd"]
-[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dj7kf6mv7o14x" path="res://player.tscn" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://cncsr285fst15" path="res://camera_rotation.gd" id="1_lquwl"]
-[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_1bvp3"]
-
-[sub_resource type="Resource" id="Resource_7mycd"]
-script = ExtResource("2_1bvp3")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
 albedo_color = Color(0.4630682, 0.4630682, 0.4630682, 1)
@@ -32,43 +25,11 @@ data = PackedVector3Array(5, 2.5, 5, 5, -2.5, 5, -5, -2.5, 5, 5, 2.5, -5, -5, -2
 script = ExtResource("1_7mycd")
 
 [node name="Player" parent="." unique_id=375948883 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 9.434771e-09, 0, 1, 0, -9.434771e-09, 0, 1, 0, 2.4999995, 0)
-
-[node name="CameraRotation" type="Node3D" parent="." unique_id=1626168874]
-script = ExtResource("1_lquwl")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=2003259967]
-physics_interpolation_mode = 1
-transform = Transform3D(1, 0, 9.434771e-09, 0, 1, 0, -9.434771e-09, 0, 1, 6.60434e-08, 3.9999995, 7)
-top_level = true
-fov = 90.0
-
-[node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=815265277]
-process_priority = 300
-process_physics_priority = 300
-script = ExtResource("1_1bvp3")
-metadata/_custom_type_script = "uid://bd046eokvcnu2"
-
-[node name="PhantomCamera3D" type="Node3D" parent="." unique_id=384342023 node_paths=PackedStringArray("follow_target")]
-transform = Transform3D(1, 0, 9.434771e-09, 0, 1, 0, -9.434771e-09, 0, 1, 6.60434e-08, 3.9999995, 7)
-script = ExtResource("1_h2yge")
-priority = 1
-follow_mode = 6
-follow_target = NodePath("../Player")
-tween_resource = SubResource("Resource_7mycd")
-follow_offset = Vector3(0, 1.5, 0)
-follow_distance = 7.0
-spring_length = 7.0
-collision_mask = 2
-align_transform_with_view = Callable()
-align_position_with_view = Callable()
-align_rotation_with_view = Callable()
-metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+transform = Transform3D(-1, 0, -9.685755e-08, 0, 1, 0, 9.685755e-08, 0, -1, 0, 2.4999995, 0)
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=533098241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 2
-collision_mask = 3
 
 [node name="Floor" type="MeshInstance3D" parent="Ground" unique_id=553295124]
 mesh = SubResource("BoxMesh_ig7tw")
