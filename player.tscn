@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cegliad2iv10k" path="res://assets/wheelchair/sedan-sports.glb" id="3_i3pqv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
-bounce = 0.2
+bounce = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i3pqv"]
 radius = 1.0
@@ -15,6 +15,7 @@ script = ExtResource("1_i3pqv")
 
 [node name="Ball" type="RigidBody3D" parent="." unique_id=1490902800]
 collision_mask = 2
+mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
 gravity_scale = 10.0
 angular_damp = 5.0
@@ -22,9 +23,10 @@ angular_damp = 5.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=1989191903]
 shape = SubResource("SphereShape3D_i3pqv")
 
-[node name="GroundRay" type="RayCast3D" parent="." unique_id=1855764492]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-collision_mask = 2
-
 [node name="sedan" parent="." unique_id=837054903 instance=ExtResource("3_i3pqv")]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 0, -1, 0)
+
+[node name="GroundRay" type="RayCast3D" parent="sedan" unique_id=1855764492]
+transform = Transform3D(1, 0, 1.7484557e-07, 0, 1, 0, -1.7484557e-07, 0, 1, 0, 1, 0)
+target_position = Vector3(0, -2, 0)
+collision_mask = 2

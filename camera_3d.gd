@@ -2,17 +2,17 @@ extends Camera3D
 
 @onready var target = get_node("../sedan")
 @onready var ball = get_node("../Ball")
-var offset = Vector3(0, 4, -8)
+var offset = Vector3(0, 3, -9)
 var angular_offset = deg_to_rad(90)
 var max_camera_predict = deg_to_rad(135)
 
-var position_smoothing = 6.0
-var rotation_smoothing = 4.0
+var position_smoothing = 10.0
+var rotation_smoothing = 5.0
 
 var fov_base = 75.0
-var distance_speed_factor = 0 #процент отъезда камеры
-var fov_speed_factor = 0.10 #fov increase in %
-var max_speed_reference = 120.0
+var distance_speed_factor = 0.5 #процент отъезда камеры
+var fov_speed_factor = 0.5 #fov increase in %
+var max_speed_reference = 500.0
 
 func _physics_process(delta: float) -> void:
 	var target_rotation = Basis(target.global_transform.basis.get_rotation_quaternion())
