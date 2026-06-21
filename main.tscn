@@ -3,16 +3,20 @@
 [ext_resource type="Script" uid="uid://c2gp6h302pube" path="res://main.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dj7kf6mv7o14x" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bqhhmy45lyd2u" path="res://camera_3d.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://xjtpbln30u7q" path="res://icon.svg" id="4_1bvp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
+albedo_texture = ExtResource("4_1bvp3")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
 albedo_color = Color(0.4630682, 0.4630682, 0.4630682, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
 material = SubResource("StandardMaterial3D_7dm0k")
-size = Vector3(100, 1, 100)
+size = Vector3(1000, 1, 1000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
-size = Vector3(100, 1, 100)
+size = Vector3(1000, 1, 1000)
 
 [sub_resource type="PrismMesh" id="PrismMesh_7dm0k"]
 lightmap_size_hint = Vector2i(104, 106)
@@ -26,19 +30,19 @@ data = PackedVector3Array(5, 2.5, 5, 5, -2.5, 5, -5, -2.5, 5, 5, 2.5, -5, -5, -2
 script = ExtResource("1_7mycd")
 
 [node name="Player" parent="." unique_id=375948883 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, -1.7881393e-07, 0, 1, 0, 1.7881393e-07, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, -6.1588835e-08, 0, 1, 0, 6.1588835e-08, 0, 1, 0, 2, 0)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1049996478]
-transform = Transform3D(-1, -6.181724e-08, 6.181724e-08, 0, 0.70710677, 0.70710677, -8.742278e-08, 0.70710677, -0.70710677, 0, 5.135, -3)
-fov = 91.60399
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=690565764]
+v_offset = 3.0
+current = true
 script = ExtResource("3_h2yge")
-target_path = NodePath("../Player")
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=533098241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 2
 
 [node name="Floor" type="MeshInstance3D" parent="Ground" unique_id=553295124]
+material_override = SubResource("StandardMaterial3D_lquwl")
 mesh = SubResource("BoxMesh_ig7tw")
 
 [node name="CollisionShapeFloor" type="CollisionShape3D" parent="Ground" unique_id=1049851323]
@@ -47,11 +51,11 @@ debug_color = Color(1.2513996e-06, 0.6054075, 0.6697862, 0.41960785)
 
 [node name="Ramp" type="MeshInstance3D" parent="Ground" unique_id=1333703180]
 transform = Transform3D(-5.9604645e-08, 0, 1, 0, 1, 0, -1, 0, -5.9604645e-08, 5.2, 3, -12.5005)
+layers = 2
 mesh = SubResource("PrismMesh_7dm0k")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Ramp" unique_id=1016985546]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ramp/StaticBody3D" unique_id=1236453063]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1236453063]
+transform = Transform3D(-5.9604645e-08, 0, 1, 0, 1, 0, -1, 0, -5.9604645e-08, 5.2, 3, -12.5005)
 shape = SubResource("ConcavePolygonShape3D_ig7tw")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1695090336]

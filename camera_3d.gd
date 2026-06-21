@@ -1,19 +1,35 @@
-extends Node3D
+extends Camera3D
 
-@export var target_path: NodePath
-@export var smooth_speed: float = 5.0
-var target: Node3D
+@onready var target = get_node("../sedan")
+@onready var ball = get_node("../Ball")
+var offset = Vector3(0, 4, -8)
+var angular_offset = deg_to_rad(90)
+var max_camera_predict = deg_to_rad(135)
 
-func _ready():
-	target = get_node(target_path)
-	if target:
-		# Мгновенно перемещаем пивот к машине при старте,
-		# чтобы не было падения из нулевых координат
-		global_position = target.global_position
+var position_smoothing = 6.0
+var rotation_smoothing = 4.0
 
-func _physics_process(delta):
-	if not target:
-		return
+var fov_base = 75.0
+var distance_speed_factor = 0 #процент отъезда камеры
+var fov_speed_factor = 0.10 #fov increase in %
+var max_speed_reference = 120.0
+
+func _physics_process(delta: float) -> void:
+	var target_rotation = Basis(target.global_transform.basis.get_rotation_quaternion())
+	
+	var speed = ball.linear_velocity.length() if ball else 0.0
+	var speed_ratio = clamp(speed/max_speed_reference, 0.0, 1.0)
+	
+	var dynamic_offset = offset * (1.0 + speed_ratio * distance_speed_factor)
+	var desired_position = target.global_transform.origin + target_rotation * dynamic_offset
+	
+	var pos_t = 1.0 - exp(-position_smoothing * delta)
+	global_transform.origin = global_transform.origin.lerp(desired_position,pos_t)
+	
+	var look_dir = target.global_transform.origin - global_transform.origin
+	if look_dir.length() > 0.01:
+		var look_basis = Basis.looking_at(look_dir, Vector3.UP)
+		var rot_t = exp(-max_camera_predict * -rotation_smoothing * delta)
+		global_transform.basis = global_transform.basis.slerp(look_basis, rot_t)
 		
-	# Плавно следуем за машиной
-	global_position = global_position.lerp(target.global_position, smooth_speed * delta)
+	fov = lerp(fov, fov_base + speed_ratio * fov_speed_factor * fov_base, pos_t)

@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cegliad2iv10k" path="res://assets/wheelchair/sedan-sports.glb" id="3_i3pqv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
-bounce = 0.1
+bounce = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i3pqv"]
 radius = 1.0
 
-[node name="Player" type="Node3D" unique_id=1992417494]
-transform = Transform3D(1, 0, -1.7881393e-07, 0, 1, 0, 1.7881393e-07, 0, 1, 0, 0, 0)
+[node name="Player" type="Node3D" unique_id=790764988]
+transform = Transform3D(-1, 0, 9.139116e-08, 0, 1, 0, -9.139116e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_i3pqv")
 
 [node name="Ball" type="RigidBody3D" parent="." unique_id=1490902800]
